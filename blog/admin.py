@@ -7,7 +7,7 @@ class ArticleAdmin(admin.ModelAdmin):
     list_display_links = ('title', 'desc', 'content',)
     fieldsets = (
         (None, {
-            'fields': ('title', 'desc', 'content', )
+            'fields': ('title', 'desc', 'content', 'user',)
         }),
         ('高级设置', {
             'classes': ('collapse',),
