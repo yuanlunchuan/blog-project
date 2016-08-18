@@ -3,11 +3,11 @@ from django.contrib import admin
 from .models import *
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('title', 'desc', 'content',)
+    list_display = ('title', 'desc', 'content', )
     list_display_links = ('title', 'desc', 'content',)
     fieldsets = (
         (None, {
-            'fields': ('title', 'desc', 'content', 'user',)
+            'fields': ('title', 'desc', 'content', 'user', 'tag',)
         }),
         ('高级设置', {
             'classes': ('collapse',),
