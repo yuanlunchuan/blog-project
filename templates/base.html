@@ -1,25 +1,25 @@
 {% load staticfiles %}
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
-<title>某某某的个人博客</title>
+<title>个人博客</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <link href='{%static "css/base.css" %}' rel="stylesheet">
 <link href='{%static "css/index.css" %}' rel="stylesheet">
-  {% block custom_css %}{% endblock %}
-  <script type="text/javascript" src='{%static "js/jquery.min.js" %}'></script>
+{% block custom_css %}{% endblock %}
+<script type="text/javascript" src='{%static "js/jquery.min.js" %}'></script>
 <script type="text/javascript" src='{%static "js/sliders.js" %}'></script>
 <!--[if lt IE 9]>
-<script src="{%static "js/modernizr.js" %}"></script>
+<script src="{%static 'js/modernizr.js' %}"></script>
 <![endif]-->
   {% block custom_is %}{% endblock %}
 </head>
 <body>
 <header>
   <div class="logo">
-      <h1>某某某的个人博客</h1>
+      <h1>个人博客</h1>
       <p>梦虽虚幻,却是自己的梦想；位虽低微,却是自己的岗位；屋虽简陋,却是自己的家；志虽渺小,却是自己的追求。</p>
   </div>
   <nav id="topnav" class="f_r">
@@ -28,7 +28,7 @@
           <a href="index.html" target="_blank">{{category.name}}</a>
         {% endfor %}
     </ul>
-    <script src="{% static "js/nav.js" %}"></script>
+    <script src="{% static 'js/nav.js' %}"></script>
   </nav>
 </header>
 <article>
@@ -50,24 +50,22 @@
     <!--tit01 end-->
     <div class="moreSelect" id="lp_right_select">
       <script>
-window.onload = function ()
-{
-  var oLi = document.getElementById("tab").getElementsByTagName("li");
-  var oUl = document.getElementById("ms-main").getElementsByTagName("div");
+        window.onload = function (){
+          var oLi = document.getElementById("tab").getElementsByTagName("li");
+          var oUl = document.getElementById("ms-main").getElementsByTagName("div");
 
-  for(var i = 0; i < oLi.length; i++)
-  {
-    oLi[i].index = i;
-    oLi[i].onmouseover = function ()
-    {
-      for(var n = 0; n < oLi.length; n++) oLi[n].className="";
-      this.className = "cur";
-      for(var n = 0; n < oUl.length; n++) oUl[n].style.display = "none";
-      oUl[this.index].style.display = "block"
-    }
-  }
-}
-</script>
+          for(var i = 0; i < oLi.length; i++){
+            oLi[i].index = i;
+            oLi[i].onmouseover = function ()
+            {
+              for(var n = 0; n < oLi.length; n++) oLi[n].className="";
+              this.className = "cur";
+              for(var n = 0; n < oUl.length; n++) oUl[n].style.display = "none";
+              oUl[this.index].style.display = "block"
+            }
+          }
+        }
+      </script>
       <div class="ms-top">
         <ul class="hd" id="tab">
           <li class="cur"><a href="/">浏览排行</a></li>
@@ -86,7 +84,7 @@ window.onload = function ()
             <li><a href="/" target="_blank">豪雅手机正式发布! 在法国全手工打造的奢侈品</a></li>
           </ul>
         </div>
-        <div  class="bd bd-news">
+        <div class="bd bd-news">
           <ul>
             <li><a href="/" target="_blank">原来以为，一个人的勇敢是，删掉他的手机号码...</a></li>
             <li><a href="/" target="_blank">手机的16个惊人小秘密，据说99.999%的人都不知</a></li>
