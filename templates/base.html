@@ -14,7 +14,7 @@
 <!--[if lt IE 9]>
 <script src="{%static 'js/modernizr.js' %}"></script>
 <![endif]-->
-  {% block custom_is %}{% endblock %}
+{% block custom_is %}{% endblock %}
 </head>
 <body>
 <header>
@@ -56,12 +56,11 @@
 
           for(var i = 0; i < oLi.length; i++){
             oLi[i].index = i;
-            oLi[i].onmouseover = function ()
-            {
+            oLi[i].onmouseover = function (){
               for(var n = 0; n < oLi.length; n++) oLi[n].className="";
               this.className = "cur";
-              for(var n = 0; n < oUl.length; n++) oUl[n].style.display = "none";
-              oUl[this.index].style.display = "block"
+              for(var n = 0; n < oUl.length; n++)oUl[n].style.display = "none";
+              oUl[this.index].style.display = "block";
             }
           }
         }
