@@ -8,9 +8,7 @@ def index(request):
         articles = Article.objects.all()
         paginator = Paginator(articles, 2)
         try:
-            page = 1
-            if request.GET.get('page'):
-                page = int(request.GET.get('page'))
+            page = int(request.GET.get('page', 1))
             articles = paginator.page(page)
         except (EmptyPage, InvalidPage, PageNotAnInteger):
             articles = paginator.page(1)
