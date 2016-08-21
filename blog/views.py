@@ -7,6 +7,9 @@ def index(request):
         category_list = Category.objects.all()
         articles = Article.objects.all()
         paginator = Paginator(articles, 2)
+        ads = Ad.objects.all()
+        archive_list = Article.objects.distinct_date()
+
         try:
             page = int(request.GET.get('page', 1))
             articles = paginator.page(page)
