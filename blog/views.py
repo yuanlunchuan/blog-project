@@ -23,8 +23,7 @@ def archive(request):
   try:
     year = request.GET.get('year', None)
     month = request.GET.get('month', None)
-    print("--------------time: ",year+'-'+month)
-    articles = Article.objects.filter(comment_containers=year+'-'+month)
+    articles = Article.objects.filter(date_publish__contains=year+'-'+month)
     paginator = Paginator(articles, 2)
     try:
       page = int(request.GET.get('page', 1))
@@ -32,7 +31,6 @@ def archive(request):
     except (EmptyPage, InvalidPage, PageNotAnInteger):
       articles = paginator.page(1)
 
-    print("--------------articles: ", articles)
   except Exception as e:
     print(e)
   return render(request, 'archive.html', locals())
