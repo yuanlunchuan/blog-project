@@ -10,6 +10,10 @@ def index(request):
         ads = Ad.objects.all()
         archive_list = Article.objects.distinct_date()
 
+        l = [1, 2, 3]
+        for index, val in enumerate(l):
+            print('index is %d, val is %d' % (index, val))
+
         try:
             page = int(request.GET.get('page', 1))
             articles = paginator.page(page)
