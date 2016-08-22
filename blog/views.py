@@ -8,11 +8,8 @@ def index(request):
         articles = Article.objects.all()
         paginator = Paginator(articles, 2)
         ads = Ad.objects.all()
+        tags = Tag.objects.all()
         archive_list = Article.objects.distinct_date()
-
-        l = [1, 2, 3]
-        for index, val in enumerate(l):
-            print('index is %d, val is %d' % (index, val))
 
         try:
             page = int(request.GET.get('page', 1))
