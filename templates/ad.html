@@ -1,4 +1,5 @@
 {% load staticfiles %}
+<div id="ad-count" class="hidden" data-ad-count="{{ ads | length }}"></div>
 
 <div class="banner">
     <div id="slide-holder">
@@ -20,7 +21,8 @@
         var slider={};
       }
       slider.data = [];
-      for(var i=1; i<5; i++){
+      var adCount = parseInt($('#ad-count').data('ad-count'))+1;
+      for(var i=1; i<adCount; i++){
         slider.data.push({
           "id": "slide-img-"+i,
           "client": $("#slide-img-"+i).data('client'),
