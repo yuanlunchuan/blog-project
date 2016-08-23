@@ -14,8 +14,11 @@ def global_setting(request):
     archive_list = Article.objects.distinct_date()
     comment_count_list = Comment.objects.values('article').annotate(comment_count=Count('article')).order_by('-comment_count')
     comment_list = [Article.objects.get(pk=comment_count['article']) for comment_count in comment_count_list]
+    click_article_list = Article.objects.all().order_by('-click_count')
+    command_articles = Article.objects.filter(is_recommend=True)
     SITE_NAME = settings.SITE_NAME
     SITE_DESC = settings.SITE_DESC
+
     return locals()
 
 def index(request):
