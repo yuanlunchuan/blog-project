@@ -6,7 +6,7 @@
         <div id="slide-runner">
             {% for ad in ads %}
                 <a href="{{ ad.callback_url }}" target="_blank">
-                    <img id="slide-img-{{forloop.counter}}" data-client="{{ad.title}}" data-desc="{{ad.description}}" src='uploads/{{ad.image_url}}' alt="" />
+                    <img id="slide-img-{{forloop.counter}}" data-client="{{ad.title}}" data-desc="{{ad.description}}" src='/uploads/{{ad.image_url}}' alt="" />
                 </a>
             {% endfor %}
             <div id="slide-controls">
