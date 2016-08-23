@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.conf import settings
 from django.core.paginator import Paginator, InvalidPage, EmptyPage, PageNotAnInteger
 from .models import *
+from django.db.models import Count
 
 logger = logging.getLogger('blog.views')
 
@@ -11,15 +12,11 @@ def global_setting(request):
     ads = Ad.objects.all()
     tags = Tag.objects.all()
     archive_list = Article.objects.distinct_date()
-
-    return {
-        'category_list': category_list,
-        'ads': ads,
-        'tags': tags,
-        'archive_list': archive_list,
-        'SITE_NAME': settings.SITE_NAME,
-        'SITE_DESC': settings.SITE_DESC
-    }
+    comment_count_list = Comment.objects.values('article').annotate(comment_count=Count('article')).order_by('-comment_count')
+    comment_list = [Article.objects.get(pk=comment_count['article']) for comment_count in comment_count_list]
+    SITE_NAME = settings.SITE_NAME
+    SITE_DESC = settings.SITE_DESC
+    return locals()
 
 def index(request):
     articles = getPage(request, Article.objects.all())
