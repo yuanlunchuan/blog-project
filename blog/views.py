@@ -29,8 +29,42 @@ def archive(request):
     year = request.GET.get('year', None)
     month = request.GET.get('month', None)
     articles = getPage(request, Article.objects.filter(date_publish__contains=year + '-' + month))
-
     return render(request, 'archive.html', locals())
+
+def do_logout(request):
+  pass
+
+def comment_post(request):
+  pass
+
+def article(request):
+    try:
+        id = request.GET.get('id', None)
+        try:
+            article = Article.objects.get(pk=id)
+        except Article.DoesNotExist:
+            return render(request, 'failure.html', {'reason': '没有找到对应的文章'})
+
+    #     # 评论表单
+    #     comment_form = CommentForm({'author': request.user.username,
+    #                                 'email': request.user.email,
+    #                                 'url': request.user.url,
+    #                                 'article': id} if request.user.is_authenticated() else{'article': id})
+    #     # 获取评论信息
+    #     comments = Comment.objects.filter(article=article).order_by('id')
+    #     comment_list = []
+    #     for comment in comments:
+    #         for item in comment_list:
+    #             if not hasattr(item, 'children_comment'):
+    #                 setattr(item, 'children_comment', [])
+    #             if comment.pid == item:
+    #                 item.children_comment.append(comment)
+    #                 break
+    #         if comment.pid is None:
+    #             comment_list.append(comment)
+    except Exception as e:
+      logger.error(e)
+    return render(request, 'article.html', locals())
 
 def getPage(request, articles):
     paginator = Paginator(articles, 2)
