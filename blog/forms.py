@@ -6,18 +6,12 @@ from blog.models import User
 import re
 
 class LoginForm(forms.Form):
-    '''
-    登录Form
-    '''
     username = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "Username", "required": "required",}),
                               max_length=50,error_messages={"required": "username不能为空",})
     password = forms.CharField(widget=forms.PasswordInput(attrs={"placeholder": "Password", "required": "required",}),
                               max_length=20,error_messages={"required": "password不能为空",})
 
 class RegForm(forms.Form):
-    '''
-    注册表单
-    '''
     username = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "Username", "required": "required",}),
                               max_length=50,error_messages={"required": "username不能为空",})
     email = forms.EmailField(widget=forms.TextInput(attrs={"placeholder": "Email", "required": "required",}),
@@ -28,9 +22,6 @@ class RegForm(forms.Form):
                               max_length=20,error_messages={"required": "password不能为空",})
 
 class CommentForm(forms.Form):
-    '''
-    评论表单
-    '''
     author = forms.CharField(widget=forms.TextInput(attrs={"id": "author", "class": "comment_input",
                                                            "required": "required","size": "25", "tabindex": "1"}),
                               max_length=50,error_messages={"required":"username不能为空",})

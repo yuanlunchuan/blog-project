@@ -1,7 +1,9 @@
 import logging
 from django.shortcuts import render, redirect
 from django.conf import settings
+from django.contrib.auth import logout, login, authenticate
 from django.core.paginator import Paginator, InvalidPage, EmptyPage, PageNotAnInteger
+from django.contrib.auth.hashers import make_password
 from .models import *
 from django.db.models import Count
 from blog.forms import *
@@ -33,10 +35,60 @@ def archive(request):
     return render(request, 'archive.html', locals())
 
 def do_logout(request):
-  pass
+    try:
+        logout(request)
+    except Exception as e:
+        logger.error(e)
+    return redirect(request.META['HTTP_REFERER'])
 
 def comment_post(request):
   pass
+
+def do_reg(request):
+    try:
+        if request.method == 'POST':
+            reg_form = RegForm(request.POST)
+            if reg_form.is_valid():
+                user = User.objects.create(username=reg_form.cleaned_data["username"],
+                                    email=reg_form.cleaned_data["email"],
+                                    url=reg_form.cleaned_data["url"],
+                                    password=make_password(reg_form.cleaned_data["password"]),)
+                user.save()
+
+                user.backend = 'django.contrib.auth.backends.ModelBackend'
+                login(request, user)
+                return redirect(request.POST.get('source_url'))
+            else:
+                return render(request, 'failure.html', {'reason': reg_form.errors})
+        else:
+            reg_form = RegForm()
+    except Exception as e:
+        logger.error(e)
+    return render(request, 'reg.html', locals())
+
+# 登录
+def do_login(request):
+    try:
+        if request.method == 'POST':
+            login_form = LoginForm(request.POST)
+            if login_form.is_valid():
+                # 登录
+                username = login_form.cleaned_data["username"]
+                password = login_form.cleaned_data["password"]
+                user = authenticate(username=username, password=password)
+                if user is not None:
+                    user.backend = 'django.contrib.auth.backends.ModelBackend' # 指定默认的登录验证方式
+                    login(request, user)
+                else:
+                    return render(request, 'failure.html', {'reason': '登录验证失败'})
+                return redirect(request.POST.get('source_url'))
+            else:
+                return render(request, 'failure.html', {'reason': login_form.errors})
+        else:
+            login_form = LoginForm()
+    except Exception as e:
+        logger.error(e)
+    return render(request, 'login.html', locals())
 
 def article(request):
     try:
