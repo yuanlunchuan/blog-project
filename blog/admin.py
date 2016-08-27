@@ -3,8 +3,8 @@ from django.contrib import admin
 from .models import *
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('title', 'desc', 'content', )
-    list_display_links = ('title', 'desc', 'content',)
+    list_display = ('title', 'desc', )
+    list_display_links = ('title', 'desc', )
     fieldsets = (
         (None, {
             'fields': ('title', 'desc', 'content', 'user', 'tag',)
