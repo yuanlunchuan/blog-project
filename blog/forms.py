@@ -1,9 +1,4 @@
-# -*- coding:utf-8 -*-
 from django import forms
-from django.conf import settings
-from django.db.models import Q
-from blog.models import User
-import re
 
 class LoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "Username", "required": "required",}),

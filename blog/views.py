@@ -66,18 +66,16 @@ def do_reg(request):
         logger.error(e)
     return render(request, 'reg.html', locals())
 
-# 登录
 def do_login(request):
     try:
         if request.method == 'POST':
             login_form = LoginForm(request.POST)
             if login_form.is_valid():
-                # 登录
                 username = login_form.cleaned_data["username"]
                 password = login_form.cleaned_data["password"]
                 user = authenticate(username=username, password=password)
                 if user is not None:
-                    user.backend = 'django.contrib.auth.backends.ModelBackend' # 指定默认的登录验证方式
+                    user.backend = 'django.contrib.auth.backends.ModelBackend'
                     login(request, user)
                 else:
                     return render(request, 'failure.html', {'reason': '登录验证失败'})
