@@ -11,6 +11,7 @@ from blog.forms import *
 logger = logging.getLogger('blog.views')
 
 def global_setting(request):
+    links = Links.objects.all()
     category_list = Category.objects.all()
     ads = Ad.objects.all()
     tags = Tag.objects.all()

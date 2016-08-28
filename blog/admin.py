@@ -28,10 +28,13 @@ class CommentAdmin(admin.ModelAdmin):
 class AdAdmin(admin.ModelAdmin):
     list_display = ('description', 'date_publish', )
 
+class LinkAdmin(admin.ModelAdmin):
+    list_display = ('title', 'description',)
+
 admin.site.register(User)
 admin.site.register(Tag)
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Category)
 admin.site.register(Comment, CommentAdmin)
-admin.site.register(Links)
+admin.site.register(Links, LinkAdmin)
 admin.site.register(Ad, AdAdmin)
