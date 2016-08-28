@@ -110,9 +110,8 @@ class Links(models.Model):
     def __str__(self):
         return self.title
 
-# 广告
 class Ad(models.Model):
-    title = models.CharField(max_length=50, verbose_name='广告标题')
+    title = models.CharField(max_length=50,  verbose_name='广告标题')
     description = models.CharField(max_length=200,  verbose_name='广告描述')
     image_url = models.ImageField(upload_to='ad/%Y/%m', verbose_name='图片路径')
     callback_url = models.URLField(null=True, blank=True, verbose_name='回调url')
