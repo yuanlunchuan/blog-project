@@ -12,7 +12,7 @@
           <p class="autor">
             <span class="lm f_l">
                 {% for tag in article.tag.all %}
-                  <a href="/">{{ tag.name }}</a>
+                  <a href="/?tag_id={{ tag.id }}">{{ tag.name }}</a>
                 {% endfor %}
             </span>
             <span class="dtime f_l">{{ article.date_publish | date:'Y-m-d'}}</span>

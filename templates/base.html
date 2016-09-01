@@ -105,7 +105,7 @@
       <h3>标签云</h3>
       <ul>
         {% for tag in tags %}
-        <li><a href="/">{{ tag.name }}</a></li>
+        <li><a href="/?tag_id={{tag.id}}">{{ tag.name }}</a></li>
         {% endfor %}
       </ul>
     </div>
