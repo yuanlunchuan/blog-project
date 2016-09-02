@@ -78,21 +78,21 @@
         <div style="display: block;" class="bd bd-news" >
           <ul>
             {% for article in click_article_list %}
-              <li><a href="/" target="_blank">{{ article.title }}</a></li>
+              <li><a href="{% url 'article' %}?id={{ article.id }}" target="_blank">{{ article.title }}</a></li>
             {% endfor %}
           </ul>
         </div>
         <div class="bd bd-news">
           <ul>
             {% for comment_item in comment_list %}
-              <li><a href="/" target="_blank">{{comment_item.title}}</a></li>
+              <li><a href="{% url 'article' %}?id={{ comment_item.id }}" target="_blank">{{comment_item.title}}</a></li>
             {% endfor %}
           </ul>
         </div>
         <div class="bd bd-news">
           <ul>
             {% for article in command_articles %}
-              <li><a href="/" target="_blank">{{ article.title }}</a></li>
+              <li><a href="{% url 'article' %}?id={{ article.id }}" target="_blank">{{ article.title }}</a></li>
             {% endfor %}
           </ul>
         </div>
