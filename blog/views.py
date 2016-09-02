@@ -26,7 +26,10 @@ def global_setting(request):
     return locals()
 
 def index(request):
-    articles = getPage(request, Article.objects.all())
+    if request.GET.get('tag_id'):
+        articles = getPage(request, Article.objects.filter(tag__id=request.GET.get('tag_id')))
+    else:
+      articles = getPage(request, Article.objects.all())
     return render(request, 'index.html', locals())
 
 def archive(request):
