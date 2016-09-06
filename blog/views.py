@@ -5,7 +5,7 @@ from django.contrib.auth import logout, login, authenticate
 from django.core.paginator import Paginator, InvalidPage, EmptyPage, PageNotAnInteger
 from django.contrib.auth.hashers import make_password
 from .models import *
-from django.db.models import Count
+from django.db.models import Count, F
 from blog.forms import *
 
 logger = logging.getLogger('blog.views')
@@ -99,7 +99,7 @@ def article(request):
             article = Article.objects.get(pk=id)
         except Article.DoesNotExist:
             return render(request, 'failure.html', {'reason': '没有找到对应的文章'})
-        article.click_count = article.click_count+1
+        article.click_count = F('click_count')+1
         article.save()
         comment_form = CommentForm({'author': request.user.username,
                                     'email': request.user.email,
